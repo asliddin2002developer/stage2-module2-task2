@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null){
             resp.sendRedirect("/login.jsp");
         }else{
-            resp.sendRedirect("/users/hello.jsp");
+            resp.sendRedirect("/user/hello.jsp");
         }
 
 
