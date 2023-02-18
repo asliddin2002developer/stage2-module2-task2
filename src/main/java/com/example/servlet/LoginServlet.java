@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
         } catch (NullPointerException e){
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
