@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-import static sun.awt.PaintEventDispatcher.dispatcher;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -22,12 +21,9 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         List<String> users = Users.getInstance().getUsers();
-
-        String name = req.getParameter("login");
-        String password = req.getParameter("password");
         try {
-            if (users.contains(name) && !password.isEmpty()) {
-                session.setAttribute("user", name);
+            if (users.contains(req.getParameter("login")) && !req.getParameter("password").isEmpty()) {
+                session.setAttribute("user", req.getParameter("login"));
                 resp.sendRedirect("/user/hello.jsp");
             } else {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
