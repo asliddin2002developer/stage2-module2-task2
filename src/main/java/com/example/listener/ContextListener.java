@@ -10,8 +10,7 @@ public class ContextListener implements ServletContextListener {
     //write your code here!
 
     public void contextInitialized(ServletContextEvent e){
-        e.getServletContext().setAttribute("servletTimeInit",
-                LocalDateTime.now());
+        e.getServletContext().setAttribute("servletTimeInit", LocalDateTime.now());
     }
 
 }
