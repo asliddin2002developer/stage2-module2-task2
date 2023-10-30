@@ -28,6 +28,7 @@ pipeline {
                 script {
                   deploy adapters: [tomcat9(credentialsId: 'war-deployer', path: '', url: 'http://localhost:8080')], contextPath: '/pipeline', onFailure: false, war: 'webapp/target/*.war' 
                 }
+            }
         }
     
     }
