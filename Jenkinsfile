@@ -9,18 +9,21 @@ pipeline {
     stages {
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sonar1') {
+                withSonarQubeEnv(installationName: 'sonar') {
                     bat 'mvn clean verify sonar:sonar'
                 }
             }
         }
 
         stage('Quality Gates') {
-          timeout(time: 1, unit: 'HOURS')
-          def qg = waitForQualityGate()
-          if (qg.status != 'OK') {
-            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-          }
+            steps {
+                  timeout(time: 1, unit: 'HOURS')
+                  def qg = waitForQualityGate()
+                  if (qg.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                  }
+            }
+          
         }
     
     }
