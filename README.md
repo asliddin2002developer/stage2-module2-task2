@@ -1,3 +1,14 @@
+# Jenkins Users
+**Admin** user:
+ + **username**: admin
+ + **password**: admin
+
+**Developer** user can only build and cancel jobs:
++ **username**: developer
++ **password**: developer
+
+  
+
 # Servlets/Filter/Session
 
 ## Description
