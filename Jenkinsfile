@@ -26,9 +26,9 @@ pipeline {
         stage ('Deploy') {
             steps {
                 script {
-                  deploy adapters: [tomcat9(credentialsId: 'war-deployer', path: '', url: 'http://localhost:8080')], contextPath: '/pipeline', onFailure: false, war: 'filter-1.0-SNAPSHOT.war' 
+                  deploy adapters: [tomcat9(credentialsId: 'war-deployer', path: '', url: 'http://localhost:8080')], contextPath: '/pipeline', onFailure: false, war: 'target/*.war' 
                 }
-            }
+            }\
         }
     
     }
