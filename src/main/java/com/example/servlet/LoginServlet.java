@@ -24,9 +24,9 @@ public class LoginServlet extends HttpServlet {
         try {
             if (users.contains(req.getParameter("login")) && !req.getParameter("password").isEmpty()) {
                 session.setAttribute("user", req.getParameter("login"));
-                resp.sendRedirect("/user/hello.jsp");
+                resp.sendRedirect(req.getContextPath() + "/user/hello.jsp");
             } else {
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher(req.getContextPath() + "/login.jsp");
                 dispatcher.forward(req, resp);
             }
         } catch (NullPointerException e){

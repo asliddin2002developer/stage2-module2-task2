@@ -3,4 +3,4 @@
 
 
 <a href="${pageContext.request.contextPath}/logout">logout</a>
-<p> Welcome you to the user page </p>
+<p> Welcome to the user page </p>
