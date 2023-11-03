@@ -1,35 +1,35 @@
-#!/usr/bin/env groovy
 pipeline {
-    agent any
+  agent any
+  stages {
+    stage('Scan') {
+      steps {
+        withSonarQubeEnv('sonar') {
+          bat 'mvn clean verify sonar:sonar'
+        }
 
-    tools {
-      maven '3.9.5'
+      }
     }
 
-    stages {
-        stage('Scan') {
-            steps {
-                withSonarQubeEnv(installationName: 'sonar') {
-                    bat 'mvn clean verify sonar:sonar'
-                }
-            }
+    stage('Quality Gate') {
+      steps {
+        timeout(time: 1, unit: 'HOURS') {
+          waitForQualityGate true
         }
 
-        stage("Quality Gate") {
-            steps{
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
-        stage ('Deploy') {
-            steps {
-                script {
-                  deploy adapters: [tomcat9(credentialsId: 'deploy-tomcat', path: '', url: 'http://localhost:8080')], contextPath: '/pipeline-example', onFailure: false, war: 'target/*.war' 
-                }
-            }
-        }
-    
+      }
     }
+
+    stage('Deploy') {
+      steps {
+        script {
+          deploy adapters: [tomcat9(credentialsId: 'deploy-tomcat', path: '', url: 'http://localhost:8080')], contextPath: '/pipeline-example', onFailure: false, war: 'target/*.war'
+        }
+
+      }
+    }
+
+  }
+  tools {
+    maven '3.9.5'
+  }
 }
