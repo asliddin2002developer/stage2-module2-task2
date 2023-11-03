@@ -4,8 +4,10 @@
 <c:set var="language" value="en" scope="session"/>
 <!DOCTYPE 'html'>
 <html lang="en">
+<head>
+    <title><title>Home</title>
+</head>
 <body>
-<title>Home</title>
 <%--<c:out value="${pageContext.request.contextPath}"/>--%>
 <jsp:forward page="/login.jsp"/>
 <%--adsddsdsd--%>
